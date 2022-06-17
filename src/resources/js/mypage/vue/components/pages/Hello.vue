@@ -110,8 +110,6 @@ export default {
     onMounted(() => {
       console.log("Component is mounted!");
 
-      // router.push({ name: "login" });
-
       axios.defaults.withCredentials = true;
       axios
         .get("http://localhost/api/user", {

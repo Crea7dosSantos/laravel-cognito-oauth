@@ -18,8 +18,6 @@ final class CustomAccessTokenController extends AccessTokenController
     {
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
-        Log::debug(session()->get('hoge'));
-
         return $this->issueToken($request);
     }
 }

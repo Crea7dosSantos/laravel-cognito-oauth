@@ -33,6 +33,7 @@ final class CallbackController extends Controller
             'code' => $request->code,
         ]);
 
-        return $response->json();
+        return redirect()->route('home');
+        // return $response->json();
     }
 }

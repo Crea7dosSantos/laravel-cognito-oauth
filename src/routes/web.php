@@ -40,4 +40,6 @@ Route::post('/logout', LogoutController::class)->name('logout');
 Route::get('/redirect', RedirectController::class)->name('redirect');
 Route::get('/auth/callback', CallbackController::class)->name('callback');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth:web', 'write.expiration'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
