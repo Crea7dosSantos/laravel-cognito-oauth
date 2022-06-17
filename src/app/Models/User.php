@@ -18,6 +18,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'cognito_username',
+        'cognito_sub',
         'name',
         'email',
         'password',
