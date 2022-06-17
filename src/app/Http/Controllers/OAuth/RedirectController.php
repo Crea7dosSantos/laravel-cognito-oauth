@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Laravel\Passport\Client;
 
 final class RedirectController extends Controller
 {
@@ -25,8 +26,10 @@ final class RedirectController extends Controller
             '='
         ), '+/', '-_');
 
+        $client = Client::where('name', 'MPA')->first();
+
         $query = http_build_query([
-            'client_id' => '968edff2-6086-4299-bd4d-21c9f29bb82d',
+            'client_id' => $client->id,
             'redirect_uri' => 'http://localhost/auth/callback',
             'response_type' => 'code',
             'scope' => '',

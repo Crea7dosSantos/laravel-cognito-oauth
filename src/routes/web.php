@@ -4,6 +4,8 @@ use App\Http\Controllers\OAuth\CallbackController;
 use App\Http\Controllers\OAuth\LoginController;
 use App\Http\Controllers\OAuth\LogoutController;
 use App\Http\Controllers\OAuth\RedirectController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +21,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('set-session', function (Request $request) {
+    $request->session()->put('hoge', 'sessionが入るよ');
+});
+Route::get('get-session', function (Request $request) {
+    $hoge = $request->session()->get('hoge');
+    Log::debug($hoge);
+    echo $hoge;
 });
 
 Route::controller(LoginController::class)->prefix('login')->group(function () {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Laravel\Passport\Client;
 
 final class CallbackController extends Controller
 {
@@ -22,9 +23,11 @@ final class CallbackController extends Controller
             InvalidArgumentException::class
         );
 
+        $client = Client::where('name', 'MPA')->first();
+
         $response = Http::asForm()->post('http://host.docker.internal:80/oauth/token', [
             'grant_type' => 'authorization_code',
-            'client_id' => '968edff2-6086-4299-bd4d-21c9f29bb82d',
+            'client_id' => $client->id,
             'redirect_uri' => 'http://localhost/auth/callback',
             'code_verifier' => $codeVerifier,
             'code' => $request->code,

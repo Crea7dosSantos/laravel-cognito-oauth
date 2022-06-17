@@ -9,8 +9,8 @@ import { useRoute } from "vue-router";
 
 export default {
   setup() {
-    const clientId = "968ee01e-2f04-4a73-ae97-11e80003a5f6";
-    const clientSecret = "bWxruHpdYk3Mg1C460u0yvcaK0Vl1wMbn81RVcVu";
+    const clientId = process.env.MIX_SPA_CLIENT_ID;
+    const clientSecret = process.env.MIX_SPA_CLIENT_SECRET_ID;
     const redirectUri = "http://mypage.localhost/auth/callback";
     const route = useRoute();
     const code = route.query.code;
