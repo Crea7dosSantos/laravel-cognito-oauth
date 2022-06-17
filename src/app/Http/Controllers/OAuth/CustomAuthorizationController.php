@@ -32,6 +32,8 @@ final class CustomAuthorizationController extends AuthorizationController
         if ($request->user()) {
             Log::debug('認証が済んでいます');
             Log::debug($request->user());
+            $hoge = $request->session()->get('hoge');
+            Log::debug($hoge);
         }
 
         $authRequest = $this->withErrorHandling(function () use ($psrRequest) {
