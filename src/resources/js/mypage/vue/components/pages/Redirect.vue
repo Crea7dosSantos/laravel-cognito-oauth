@@ -32,7 +32,7 @@ export default {
 
           axios.defaults.withCredentials = true;
           axios
-            .get("http://api.localhost/user", {
+            .get("http://localhost/api/user", {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer" + response.data.access_token,
