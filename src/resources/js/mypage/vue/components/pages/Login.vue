@@ -7,7 +7,7 @@ import { onBeforeMount } from "@vue/runtime-core";
 
 export default {
   setup() {
-    const clientId = "968ee01e-2f04-4a73-ae97-11e80003a5f6";
+    const clientId = process.env.MIX_SPA_CLIENT_ID;
     const redirectUri = "http://mypage.localhost/auth/callback";
     const responseType = "code";
     const state = "hohgeodjakrjejareljarlejaljrelkaj";

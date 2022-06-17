@@ -42,7 +42,7 @@ class RouteServiceProvider extends ServiceProvider
         $domain_exclude_subdomain = $domain->getWithoutSubdomain();
 
         $this->routes(function () use ($domain_exclude_subdomain) {
-            Route::domain("api.$domain_exclude_subdomain")
+            Route::prefix('api')
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
 
