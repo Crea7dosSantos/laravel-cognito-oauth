@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        session()->put('hoge', 'homeでセッションを作成しました');
         return view('home');
     }
 }

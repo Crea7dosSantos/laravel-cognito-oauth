@@ -103,13 +103,31 @@
 import { onMounted } from "@vue/runtime-core";
 import axios from "axios";
 import router from "../../router";
+import Cookie from "js-cookie";
 
 export default {
   setup() {
     onMounted(() => {
       console.log("Component is mounted!");
 
-      router.push({ name: "login" });
+      // router.push({ name: "login" });
+
+      axios.defaults.withCredentials = true;
+      axios
+        .get("http://localhost/api/user", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + Cookie.get("access_token"),
+          },
+          responsetype: "json",
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+          router.push({ name: "login" });
+        });
     });
 
     function logout() {

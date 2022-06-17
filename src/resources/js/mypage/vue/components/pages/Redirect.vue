@@ -4,8 +4,9 @@
 
 <script>
 import { onMounted } from "@vue/runtime-core";
-import axios from "axios";
 import { useRoute } from "vue-router";
+import axios from "axios";
+import Cookie from "js-cookie";
 
 export default {
   setup() {
@@ -29,23 +30,8 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-
-          axios.defaults.withCredentials = true;
-          axios
-            .get("http://localhost/api/user", {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer" + response.data.access_token,
-                "X-Requested-With": "XMLHttpRequest",
-              },
-              responsetype: "json",
-            })
-            .then((response) => {
-              console.log(response.data);
-            })
-            .catch((err) => {
-              console.log(err.response.data.message);
-            });
+          Cookie.set("access_token", response.data.access_token);
+          Cookie.set("refresh_token", response.data.refresh_token);
         });
     });
   },
