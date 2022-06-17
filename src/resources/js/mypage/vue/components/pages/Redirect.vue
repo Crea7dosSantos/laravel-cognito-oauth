@@ -5,6 +5,7 @@
 <script>
 import { onMounted } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
+import router from "../../router";
 import axios from "axios";
 import Cookie from "js-cookie";
 
@@ -32,6 +33,8 @@ export default {
           console.log(response.data);
           Cookie.set("access_token", response.data.access_token);
           Cookie.set("refresh_token", response.data.refresh_token);
+
+          router.push({ name: "hello" });
         });
     });
   },

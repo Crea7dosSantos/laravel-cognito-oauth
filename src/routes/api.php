@@ -24,7 +24,8 @@ Route::get('get-session', function (Request $request) {
     echo $hoge;
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    session()->put('hoge', 'apiでセッションを作成しました');
-    return response()->json($request->user());
+Route::middleware(['auth:api', 'write.expiration'])->group(function () {
+    Route::get('/user', function (Request $request) {
+        return response()->json($request->user());
+    });
 });
