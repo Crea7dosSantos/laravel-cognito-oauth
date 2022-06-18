@@ -3,6 +3,7 @@
 namespace App\UseCases\OAuth;
 
 use App\Exceptions\Admin\OperatorNotExistedException;
+use App\Exceptions\NotExistsUserException;
 use App\Models\User;
 use App\Services\Cognito;
 use App\Services\JWTVerifier;
@@ -26,15 +27,13 @@ final class LoginAction
      * Undocumented function
      *
      * @param Request $request
-     * @return void|CognitoIdentityProviderException|OperatorNotExistedException
+     * @return void|CognitoIdentityProviderException|OperatorNotExistedException|NotExistsUserException
      */
     public function __invoke(Request $request): void
     {
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
         $user = User::where('email', $request->email)->first();
-        Log::debug('メールアドレスで一致したユーザー:');
-        Log::debug($user);
 
         try {
             $response = $this->service->auth($user->cognito_username, $request->password);
@@ -46,10 +45,9 @@ final class LoginAction
         $decoded = $this->jwt_verifier->decode($jwt);
 
         if (!User::where('cognito_sub', $decoded->sub)->exists()) {
-            Log::debug('対象のsubを持ったユーザーがいません');
+            throw new NotExistsUserException('入力されたログイン情報に一致するユーザーが見つかりません');
         }
 
-        Log::debug('認証に成功しました');
         Auth::loginUsingId($user->id);
     }
 }
