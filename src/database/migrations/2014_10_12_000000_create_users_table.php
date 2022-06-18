@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('cognito_username');
             $table->string('cognito_sub')->unique();
+            $table->string('cognito_google_sub')->unique()->nullable();
+            $table->string('cognito_apple_sub')->unique()->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

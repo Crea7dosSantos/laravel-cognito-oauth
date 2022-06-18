@@ -20,6 +20,8 @@ class User extends Authenticatable
     protected $fillable = [
         'cognito_username',
         'cognito_sub',
+        'cognito_google_sub',
+        'cognito_apple_sub',
         'name',
         'email',
         'password',
