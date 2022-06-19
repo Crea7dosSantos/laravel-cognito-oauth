@@ -52,20 +52,22 @@ final class PassportController extends Controller
      * verify query parmeter and request token endpoint
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|InvalidArgumentException
+     * @return \Illuminate\Http\RedirectResponse
      */
-    protected function callback(Request $request)
+    protected function callback(Request $request): \Illuminate\Http\RedirectResponse
     {
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
         $state = $request->session()->pull('state');
         $code_verifier = $request->session()->pull('code_verifier');
 
-        throw_unless(
-            strlen($state) > 0 && $state === $request->state,
-            InvalidArgumentException::class,
-            'リクエストに付与された認可コードで不正な値が使用されています'
-        );
+        if (strlen($state) <= 0 || $state !== $request->state) {
+            Log::debug('指定されたstateは保存したstateと一致しませんでした');
+
+            return redirect()
+                ->route('login')
+                ->withErrors(['リクエストで指定された値に不正が見つかりました']);
+        }
 
         $client = Client::where('name', 'MPA')->first();
 

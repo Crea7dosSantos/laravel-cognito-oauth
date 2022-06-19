@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\OAuth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 final class LogoutController extends Controller
 {
@@ -17,39 +17,37 @@ final class LogoutController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $this->guard()->logout();
+        Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
+        $request->user()
+            ->tokens
+            ->each(function ($token, $key) {
+                $this->revokeAccessAndRefreshTokens($token->id);
+            });
+
+        Auth::logout();
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        if ($response = $this->loggedOut($request)) {
-            return $response;
+        if (isset($request->logout_uri)) {
+            return redirect($request->logout_uri);
         }
 
-        return $request->wantsJson()
-            ? new JsonResponse([], 204)
-            : redirect('/');
+        return redirect()->route('welcome');
     }
 
     /**
-     * The user has logged out of the application.
+     * revoke token and refresh token
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
+     * @param [type] $tokenId
+     * @return void
      */
-    protected function loggedOut(Request $request)
+    private function revokeAccessAndRefreshTokens($tokenId): void
     {
-        //
-    }
+        $tokenRepository = app('Laravel\Passport\TokenRepository');
+        $refreshTokenRepository = app('Laravel\Passport\RefreshTokenRepository');
 
-    /**
-     * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
-    protected function guard()
-    {
-        return Auth::guard();
+        $tokenRepository->revokeAccessToken($tokenId);
+        $refreshTokenRepository->revokeRefreshTokensByAccessTokenId($tokenId);
     }
 }
