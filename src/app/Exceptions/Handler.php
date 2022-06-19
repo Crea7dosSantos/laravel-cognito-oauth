@@ -63,15 +63,15 @@ class Handler extends ExceptionHandler
         if (strpos($domain_part, 'api.') !== false) {
             Log::debug('api exception error in Handler class');
 
-            if ($this->isHttpException($exception)) {
-                return response()->json([
-                    'message' => $exception->getMessage()
-                ], $exception->getStatusCode());
-            }
-            // HTTPエラー以外のエラー。400(Bad Request)を返す
-            return response()->json([
-                'message' => 'hoge'
-            ], Response::HTTP_BAD_REQUEST);
+            // if ($this->isHttpException($exception)) {
+            //     return response()->json([
+            //         'message' => $exception->getMessage()
+            //     ], $exception->getStatusCode());
+            // }
+            // // HTTPエラー以外のエラー。400(Bad Request)を返す
+            // return response()->json([
+            //     'message' => 'hoge'
+            // ], Response::HTTP_BAD_REQUEST);
         } else {
             Log::debug('web exception error in Handler class');
         }

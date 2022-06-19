@@ -97,7 +97,7 @@ final class CognitoController extends Controller
         $condition_query = User::where('cognito_google_sub', $decoded->sub)->orWhere('cognito_apple_sub', $decoded->sub);
 
         if (!$condition_query->exists()) {
-            Log::debug('対象のソーシャルアカウントの登録情報は見つかりませんでした');
+            Log::debug("sub: {$decoded->sub}のソーシャルアカウントの登録情報は見つかりませんでした");
 
             return redirect()
                 ->route('login')

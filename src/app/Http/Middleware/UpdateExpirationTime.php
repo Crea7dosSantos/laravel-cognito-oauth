@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class WriteExpirationTime
+class UpdateExpirationTime
 {
     /**
      * Handle an incoming request.
@@ -20,15 +20,25 @@ class WriteExpirationTime
     {
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
-        $before_expired_at = $request->session()->get('expired_at');
+        $response = $next($request);
+
+        $url_path = $request->path();
+        if ($url_path === 'logout') {
+            return $response;
+        }
+
+        $user = $request->user();
+        $now_at = Carbon::now();
+
+        $before_expired_at = $user->expired_at;
         Log::debug("更新前の最終有効期限: {$before_expired_at}");
 
-        $now_at = Carbon::now();
-        $request->session()->put('expired_at', $now_at->addMinutes(30));
-        $expired_at = $request->session()->get('expired_at');
+        $user->expired_at = $now_at->addMinutes(30);
+        $user->save();
+        $expired_at = $user->expired_at;
 
         Log::debug("保存した最終有効期限: {$expired_at}");
 
-        return $next($request);
+        return $response;
     }
 }

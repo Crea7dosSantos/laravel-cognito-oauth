@@ -4,8 +4,6 @@ use App\Http\Controllers\OAuth\CognitoController;
 use App\Http\Controllers\OAuth\LoginController;
 use App\Http\Controllers\OAuth\LogoutController;
 use App\Http\Controllers\OAuth\PassportController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,22 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('set-session', function (Request $request) {
-    $request->session()->put('hoge', 'sessionが入るよ');
-});
-Route::get('get-session', function (Request $request) {
-    $hoge = $request->session()->get('hoge');
-    Log::debug($hoge);
-    echo $hoge;
-});
-
+})->name('welcome');
 Route::controller(LoginController::class)->prefix('login')->group(function () {
     Route::get('/', 'index')->name('login');
     Route::post('/', 'store')->name('login');
 });
-Route::post('/logout', LogoutController::class)->name('logout');
 Route::controller(PassportController::class)->group(function () {
     Route::get('/redirect', 'redirect')->name('redirect');
     Route::get('/auth/callback', 'callback')->name('callback');
@@ -46,6 +33,7 @@ Route::controller(CognitoController::class)->prefix('cognito')->group(function (
     Route::get('callback', 'callback')->name('cognito.callback');
 });
 
-Route::middleware(['auth:web', 'write.expiration'])->group(function () {
+Route::middleware(['auth:web', 'update.expiration'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/logout', LogoutController::class)->name('logout');
 });
