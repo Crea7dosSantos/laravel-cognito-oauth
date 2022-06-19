@@ -130,17 +130,10 @@ export default {
 
     function logout() {
       console.log("called logout function");
+      const url = process.env.MIX_APP_URL;
+      const logoutUri = "http://mypage.localhost/login";
 
-      axios.defaults.withCredentials = true;
-      axios
-        .post("http://api.scout.localhost/logout")
-        .then((response) => {
-          console.log(response.data);
-          router.push({ name: "login" });
-        })
-        .catch((err) => {
-          console.log(err.response.data.message);
-        });
+      window.location.href = `${url}/logout?logout_uri=${logoutUri}`;
     }
 
     return { logout };
