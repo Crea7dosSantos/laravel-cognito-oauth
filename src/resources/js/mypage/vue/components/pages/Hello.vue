@@ -112,7 +112,7 @@ export default {
 
       axios.defaults.withCredentials = true;
       axios
-        .get("http://localhost/api/user", {
+        .get("http://api.localhost/user", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + Cookie.get("access_token"),

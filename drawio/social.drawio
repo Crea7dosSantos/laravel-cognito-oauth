@@ -1,39 +1,39 @@
 <mxfile host="65bd71144e">
     <diagram id="d5p6EeRKwRihBDUKkn4Z" name="Page-1">
-        <mxGraphModel dx="1307" dy="2602" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1057" dy="2961" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="53" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;" parent="1" vertex="1">
-                    <mxGeometry x="190" y="-170" width="1500" height="1550" as="geometry"/>
+                    <mxGeometry x="190" y="-170" width="1500" height="1780" as="geometry"/>
                 </mxCell>
                 <mxCell id="55" value="" style="endArrow=none;html=1;strokeColor=#000000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="300" y="1330" as="sourcePoint"/>
+                        <mxPoint x="300" y="1570" as="sourcePoint"/>
                         <mxPoint x="300" y="50" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="56" value="" style="endArrow=none;html=1;strokeColor=#000000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="550" y="1330" as="sourcePoint"/>
+                        <mxPoint x="550" y="1570" as="sourcePoint"/>
                         <mxPoint x="550" y="50" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="57" value="" style="endArrow=none;html=1;strokeColor=#000000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1550" y="1330" as="sourcePoint"/>
+                        <mxPoint x="1550" y="1570" as="sourcePoint"/>
                         <mxPoint x="1550" y="50" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="58" value="" style="endArrow=none;html=1;strokeColor=#000000;startArrow=none;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1300" y="1330" as="sourcePoint"/>
+                        <mxPoint x="1300" y="1570" as="sourcePoint"/>
                         <mxPoint x="1300" y="50" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="59" value="" style="endArrow=none;html=1;strokeColor=#000000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1050" y="1330" as="sourcePoint"/>
+                        <mxPoint x="1050" y="1570" as="sourcePoint"/>
                         <mxPoint x="1050" y="50" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
@@ -57,7 +57,7 @@
                 </mxCell>
                 <mxCell id="67" value="" style="endArrow=none;html=1;strokeColor=#000000;startArrow=none;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="800" y="1330" as="sourcePoint"/>
+                        <mxPoint x="800" y="1570" as="sourcePoint"/>
                         <mxPoint x="800" y="50" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
@@ -102,154 +102,146 @@
                 </mxCell>
                 <mxCell id="77" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="314.9999999999998" y="425" as="sourcePoint"/>
-                        <mxPoint x="1040" y="425" as="targetPoint"/>
+                        <mxPoint x="314.9999999999998" y="570" as="sourcePoint"/>
+                        <mxPoint x="1040" y="570" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="78" value="7. 認証リクエスト（認可サーバーがブラウザを介してCognitoで統合したソーシャルIdpにリクエスト）" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="315" y="378" width="215" height="30" as="geometry"/>
+                <mxCell id="78" value="10. 認証リクエスト（認可サーバーがブラウザを介してCognitoで統合したソーシャルIdpにリクエスト）" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="315" y="523" width="215" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="79" value="認可エンドポイント" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#CC0000;fontColor=#000000;labelBackgroundColor=none;labelBorderColor=none;fillColor=#FFFF33;" parent="1" vertex="1">
-                    <mxGeometry x="1060" y="405" width="120" height="29" as="geometry"/>
+                    <mxGeometry x="1060" y="550" width="120" height="29" as="geometry"/>
                 </mxCell>
                 <mxCell id="80" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;dashed=1;dashPattern=1 4;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1040" y="486" as="sourcePoint"/>
-                        <mxPoint x="316" y="486" as="targetPoint"/>
+                        <mxPoint x="1040" y="631" as="sourcePoint"/>
+                        <mxPoint x="316" y="631" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="81" value="8. ソーシャルIDプロバイダー認証画面へリダイレクト" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="317" y="449" width="160" height="30" as="geometry"/>
+                <mxCell id="81" value="11. ソーシャルIDプロバイダー認証画面へリダイレクト" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="317" y="594" width="160" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="83" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="310.0000000000002" y="536" as="sourcePoint"/>
-                        <mxPoint x="1540" y="536" as="targetPoint"/>
+                        <mxPoint x="310.0000000000002" y="681" as="sourcePoint"/>
+                        <mxPoint x="1540" y="681" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="84" value="9. 認証情報入力" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="315" y="510" width="160" height="20" as="geometry"/>
+                <mxCell id="84" value="12. 認証情報入力" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="315" y="655" width="160" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="85" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;dashed=1;dashPattern=1 4;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1530" y="612" as="sourcePoint"/>
-                        <mxPoint x="1060" y="612" as="targetPoint"/>
+                        <mxPoint x="1530" y="757" as="sourcePoint"/>
+                        <mxPoint x="1060" y="757" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="86" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;dashed=1;dashPattern=1 4;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1040" y="655" as="sourcePoint"/>
-                        <mxPoint x="310" y="655" as="targetPoint"/>
+                        <mxPoint x="1040" y="800" as="sourcePoint"/>
+                        <mxPoint x="310" y="800" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="87" value="&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: left ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; display: inline ; float: none&quot;&gt;11. 認証レスポンス（認可コード）&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
-                    <mxGeometry x="310" y="625" width="200" height="24" as="geometry"/>
+                <mxCell id="87" value="&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: left ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; display: inline ; float: none&quot;&gt;14. 認証レスポンス（認可コード）&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="770" width="200" height="24" as="geometry"/>
                 </mxCell>
                 <mxCell id="88" value="トークンエンドポイント" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#CC0000;fontColor=#000000;labelBackgroundColor=none;labelBorderColor=none;fillColor=#FFFF33;" parent="1" vertex="1">
-                    <mxGeometry x="1060" y="753" width="160" height="29" as="geometry"/>
+                    <mxGeometry x="1060" y="971" width="160" height="29" as="geometry"/>
                 </mxCell>
                 <mxCell id="89" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="811" y="769" as="sourcePoint"/>
-                        <mxPoint x="1038.75" y="769" as="targetPoint"/>
+                        <mxPoint x="811" y="986" as="sourcePoint"/>
+                        <mxPoint x="1038.75" y="986" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="90" value="&lt;font color=&quot;#000000&quot; face=&quot;helvetica&quot;&gt;13. トークンリクエスト&lt;/font&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="811" y="739" width="200" height="20" as="geometry"/>
+                <mxCell id="90" value="&lt;font color=&quot;#000000&quot; face=&quot;helvetica&quot;&gt;17. トークンリクエスト&lt;br&gt;&lt;/font&gt;&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;（code_verifierを付与）&lt;/span&gt;&lt;font color=&quot;#000000&quot; face=&quot;helvetica&quot;&gt;&lt;br&gt;&lt;/font&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="811" y="941" width="200" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="91" value="14. アクセストークン・&lt;br&gt;IDトークン・&lt;br&gt;更新トークンの発行" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="810" y="801" width="140" height="30" as="geometry"/>
+                <mxCell id="91" value="18. アクセストークン・&lt;br&gt;IDトークン(JWT)・&lt;br&gt;更新トークンの発行" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="810" y="1013" width="140" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="92" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;dashed=1;dashPattern=1 4;exitX=0.548;exitY=0.69;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1039.4" y="849.0000000000001" as="sourcePoint"/>
-                        <mxPoint x="811" y="849.6" as="targetPoint"/>
+                        <mxPoint x="1039.4" y="1061" as="sourcePoint"/>
+                        <mxPoint x="811" y="1061.6" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="93" value="&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: left ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; display: inline ; float: none&quot;&gt;10. 認証されたソーシャルアカウントがCognitoのユーザープールに統合&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
-                    <mxGeometry x="1060" y="562" width="200" height="40" as="geometry"/>
+                <mxCell id="93" value="&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: left ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; display: inline ; float: none&quot;&gt;13. 認証されたソーシャルアカウントがCognitoのユーザープールに統合&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="1060" y="707" width="200" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="101" value="15. 認可コード発行" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="860" y="910" width="140" height="17" as="geometry"/>
+                <mxCell id="173" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" target="170">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="930.1416666666669" y="1161" as="sourcePoint"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="103" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;dashed=1;dashPattern=1 4;exitX=0.548;exitY=0.69;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.08;entryY=0.697;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="790.0000000000001" y="933.0000000000001" as="sourcePoint"/>
-                        <mxPoint x="310" y="933.8000000000002" as="targetPoint"/>
+                        <mxPoint x="790.0000000000001" y="1156" as="sourcePoint"/>
+                        <mxPoint x="310" y="1156.8000000000002" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="109" value="トークンエンドポイント" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#CC0000;fontColor=#000000;labelBackgroundColor=none;labelBorderColor=none;fillColor=#FFFF33;" parent="1" vertex="1">
-                    <mxGeometry x="811" y="1098" width="160" height="29" as="geometry"/>
+                    <mxGeometry x="811" y="1321" width="160" height="29" as="geometry"/>
                 </mxCell>
                 <mxCell id="110" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="563.25" y="1117" as="sourcePoint"/>
-                        <mxPoint x="791" y="1117" as="targetPoint"/>
+                        <mxPoint x="563.25" y="1340" as="sourcePoint"/>
+                        <mxPoint x="791" y="1340" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="111" value="&lt;font color=&quot;#000000&quot; face=&quot;helvetica&quot;&gt;19. トークンリクエスト（code_verifierを付与）&lt;/font&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="562" y="1073" width="208" height="20" as="geometry"/>
+                <mxCell id="111" value="&lt;font color=&quot;#000000&quot; face=&quot;helvetica&quot;&gt;23. トークンリクエスト（code_verifierを付与）&lt;/font&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="562" y="1296" width="208" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="112" value="20. アクセストークン・&lt;br&gt;IDトークン・&lt;br&gt;更新トークンの発行" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="563" y="1146" width="140" height="30" as="geometry"/>
+                <mxCell id="112" value="24. アクセストークン(JWT)・&lt;br&gt;更新トークンの発行" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="563" y="1373" width="177" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="113" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;dashed=1;dashPattern=1 4;exitX=0.548;exitY=0.69;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="790.4000000000001" y="1195.4" as="sourcePoint"/>
-                        <mxPoint x="562" y="1196" as="targetPoint"/>
+                        <mxPoint x="790.4000000000001" y="1415.4" as="sourcePoint"/>
+                        <mxPoint x="562" y="1416" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="119" value="" style="endArrow=classic;html=1;strokeColor=#CC0000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="562" y="1249" as="sourcePoint"/>
-                        <mxPoint x="1292" y="1249" as="targetPoint"/>
+                        <mxPoint x="562" y="1472" as="sourcePoint"/>
+                        <mxPoint x="1292" y="1472" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="120" value="21. リソースへのアクセス" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="563" y="1217" width="148" height="25" as="geometry"/>
+                <mxCell id="120" value="25. リソースへのアクセス" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="563" y="1440" width="148" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="121" value="&lt;span&gt;23. リソース取得&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="562" y="1270" width="210" height="20" as="geometry"/>
+                <mxCell id="121" value="&lt;span&gt;27. リソース取得&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="562" y="1493" width="210" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="122" value="" style="endArrow=classic;html=1;strokeColor=#CC0000;dashed=1;dashPattern=1 4;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1288" y="1301" as="sourcePoint"/>
-                        <mxPoint x="562" y="1301" as="targetPoint"/>
+                        <mxPoint x="1288" y="1524" as="sourcePoint"/>
+                        <mxPoint x="562" y="1524" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="124" value="ソーシャルIDプロバイダーでOIDC認証する場合" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="259" y="-110" width="260" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="128" value="2. IDトークンの検証" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
+                <mxCell id="128" value="2. アクセストークン(JWT)の検証" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="1350" y="151" width="140" height="17" as="geometry"/>
                 </mxCell>
-                <mxCell id="133" value="22. IDトークンの検証" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="1361" y="1294" width="140" height="17" as="geometry"/>
+                <mxCell id="133" value="26. アクセストークン(JWT)の検証" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="1361" y="1458" width="139" height="17" as="geometry"/>
                 </mxCell>
                 <mxCell id="136" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="310" y="705.57" as="sourcePoint"/>
-                        <mxPoint x="786" y="705.57" as="targetPoint"/>
+                        <mxPoint x="310" y="850.57" as="sourcePoint"/>
+                        <mxPoint x="786" y="850.57" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="137" value="12. リダイレクトコールバック" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="315" y="714" width="169" height="17" as="geometry"/>
+                <mxCell id="137" value="15. リダイレクトコールバック" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="315" y="826" width="169" height="17" as="geometry"/>
                 </mxCell>
                 <mxCell id="138" value="リダイレクトURI" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#CC0000;fontColor=#000000;labelBackgroundColor=none;labelBorderColor=none;fillColor=#FFFF33;" parent="1" vertex="1">
-                    <mxGeometry x="810" y="692" width="120" height="29" as="geometry"/>
+                    <mxGeometry x="810" y="837" width="120" height="29" as="geometry"/>
                 </mxCell>
-                <mxCell id="139" value="&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: left ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; display: inline ; float: none&quot;&gt;16. 認証レスポンス（認可コード）&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
-                    <mxGeometry x="310" y="900" width="200" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="141" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" parent="1" edge="1">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="810" y="899" as="sourcePoint"/>
-                        <mxPoint x="810" y="879" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="880" y="899"/>
-                            <mxPoint x="880" y="879"/>
-                        </Array>
-                    </mxGeometry>
+                <mxCell id="139" value="&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: left ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; display: inline ; float: none&quot;&gt;20. 認証レスポンス（認可コード）&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="1123" width="200" height="24" as="geometry"/>
                 </mxCell>
                 <mxCell id="143" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -263,30 +255,30 @@
                 </mxCell>
                 <mxCell id="147" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="311" y="983.5700000000002" as="sourcePoint"/>
-                        <mxPoint x="540" y="984" as="targetPoint"/>
+                        <mxPoint x="311" y="1206.5700000000002" as="sourcePoint"/>
+                        <mxPoint x="540" y="1207" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="148" value="17. リダイレクトコールバック" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="316" y="960" width="169" height="17" as="geometry"/>
+                <mxCell id="148" value="21. リダイレクトコールバック" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="316" y="1183" width="169" height="17" as="geometry"/>
                 </mxCell>
                 <mxCell id="149" value="リダイレクトURI" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#CC0000;fontColor=#000000;labelBackgroundColor=none;labelBorderColor=none;fillColor=#FFFF33;" parent="1" vertex="1">
-                    <mxGeometry x="562" y="966" width="120" height="29" as="geometry"/>
+                    <mxGeometry x="562" y="1189" width="120" height="29" as="geometry"/>
                 </mxCell>
                 <mxCell id="150" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1310" y="1284" as="sourcePoint"/>
-                        <mxPoint x="1310" y="1264" as="targetPoint"/>
+                        <mxPoint x="1310" y="1448" as="sourcePoint"/>
+                        <mxPoint x="1310" y="1428" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="1380" y="1284"/>
-                            <mxPoint x="1380" y="1264"/>
+                            <mxPoint x="1380" y="1448"/>
+                            <mxPoint x="1380" y="1428"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="155" value="4. state・code_verifier・code_challengeを生成" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" vertex="1" parent="1">
+                <mxCell id="155" value="4. state・code_verifier・code_challengeを生成" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="604" y="207" width="146" height="17" as="geometry"/>
                 </mxCell>
-                <mxCell id="156" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" edge="1" parent="1">
+                <mxCell id="156" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="554" y="196" as="sourcePoint"/>
                         <mxPoint x="554" y="176" as="targetPoint"/>
@@ -296,16 +288,78 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="157" value="18. stateの検証" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" vertex="1" parent="1">
-                    <mxGeometry x="609" y="1052" width="140" height="17" as="geometry"/>
+                <mxCell id="157" value="22. stateの検証" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="609" y="1275" width="140" height="17" as="geometry"/>
                 </mxCell>
-                <mxCell id="158" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" edge="1" parent="1">
+                <mxCell id="158" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="559" y="1040.9999999999995" as="sourcePoint"/>
-                        <mxPoint x="559" y="1020.9999999999995" as="targetPoint"/>
+                        <mxPoint x="559" y="1263.9999999999995" as="sourcePoint"/>
+                        <mxPoint x="559" y="1243.9999999999995" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="629" y="1041"/>
-                            <mxPoint x="629" y="1021"/>
+                            <mxPoint x="629" y="1264"/>
+                            <mxPoint x="629" y="1244"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="159" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="315" y="421" as="sourcePoint"/>
+                        <mxPoint x="791" y="421" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="160" value="&lt;span&gt;8. ソーシャルIDプロバイダーの認証画面を要求するリクエスト&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="316" y="382" width="214" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="161" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#CC0000;dashed=1;dashPattern=1 4;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="791" y="496" as="sourcePoint"/>
+                        <mxPoint x="316" y="496" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="162" value="9. ソーシャルIDプロバイダーの認証画面を要求するリダイレクトレスポンス" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="318" y="454" width="160" height="21" as="geometry"/>
+                </mxCell>
+                <mxCell id="163" value="7. state・code_verifier・code_challengeを生成" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="863" y="406" width="146" height="17" as="geometry"/>
+                </mxCell>
+                <mxCell id="164" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="813" y="395" as="sourcePoint"/>
+                        <mxPoint x="813" y="375" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="883" y="395"/>
+                            <mxPoint x="883" y="375"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="165" value="16. stateの検証" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="861" y="914" width="140" height="17" as="geometry"/>
+                </mxCell>
+                <mxCell id="166" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="811" y="906.9999999999995" as="sourcePoint"/>
+                        <mxPoint x="811" y="886.9999999999995" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="881" y="907"/>
+                            <mxPoint x="881" y="887"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="172" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="170">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="930.1416666666669" y="1161" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="170" value="19. IDトークン(JWT)の検証・&lt;br&gt;認可コード発行" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;labelBorderColor=none;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="861" y="1120" width="169" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="171" value="" style="endArrow=none;html=1;strokeColor=#CC0000;startArrow=blockThin;startFill=1;rounded=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="811" y="1110" as="sourcePoint"/>
+                        <mxPoint x="811" y="1090" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="881" y="1110"/>
+                            <mxPoint x="881" y="1090"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
