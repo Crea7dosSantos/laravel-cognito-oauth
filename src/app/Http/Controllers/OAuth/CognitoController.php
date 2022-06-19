@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\OAuth;
 
 use App\Enums\SocialProvider;
-use App\Exceptions\NotExistsUserException;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\JWTVerifier;
+use Illuminate\Foundation\Auth\RedirectsUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -15,6 +17,8 @@ use Illuminate\Support\Str;
 
 final class CognitoController extends Controller
 {
+    use RedirectsUsers;
+
     /**
      * return redirect response for cognito authorization endpoint
      *
@@ -26,10 +30,10 @@ final class CognitoController extends Controller
     {
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
-        $request->session()->put('state', $state = Str::random(40));
+        $request->session()->put('cognito_state', $state = Str::random(40));
 
         $request->session()->put(
-            'code_verifier',
+            'cognito_code_verifier',
             $code_verifier = Str::random(128)
         );
 
@@ -53,23 +57,26 @@ final class CognitoController extends Controller
     }
 
     /**
-     * Undocumented function
+     * verify query parmeter and request cognito token endpoint
      *
      * @param Request $request
      * @param JWTVerifier $jwt_verifier
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
-    protected function callback(Request $request, JWTVerifier $jwt_verifier)
+    protected function callback(Request $request, JWTVerifier $jwt_verifier): \Illuminate\Http\RedirectResponse
     {
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
-        $code_verifier = $request->session()->pull('code_verifier');
-        $state = $request->session()->pull('state');
+        $code_verifier = $request->session()->pull('cognito_code_verifier');
+        $state = $request->session()->pull('cognito_state');
 
-        throw_unless(
-            strlen($state) > 0 && $state === $request->state,
-            InvalidArgumentException::class
-        );
+        if (strlen($state) <= 0 || $state !== $request->state) {
+            Log::debug('指定されたstateは保存したstateと一致しませんでした');
+
+            return redirect()
+                ->route('login')
+                ->withErrors(['リクエストで指定された値に不正が見つかりました']);
+        }
 
         $response = Http::asForm()->post(
             'https://' . env('AWS_COGNITO_DOMAIN') . '/oauth2/token',
@@ -88,13 +95,20 @@ final class CognitoController extends Controller
         $decoded = $jwt_verifier->decode($jwt);
 
         $condition_query = User::where('cognito_google_sub', $decoded->sub)->orWhere('cognito_apple_sub', $decoded->sub);
+
         if (!$condition_query->exists()) {
-            // throw new NotExistsUserException('入力されたログイン情報に一致するユーザーが見つかりません');
+            Log::debug('対象のソーシャルアカウントの登録情報は見つかりませんでした');
+
+            return redirect()
+                ->route('login')
+                ->withErrors(['システムに対象のソーシャルアカウントの登録情報はありませんでした']);
         }
 
         $user = $condition_query->first();
         Auth::loginUsingId($user->id);
 
-        return redirect()->route('home');
+        return $request->wantsJson()
+            ? new JsonResponse([], Response::HTTP_NO_CONTENT)
+            : redirect()->intended($this->redirectPath());
     }
 }

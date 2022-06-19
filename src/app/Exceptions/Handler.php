@@ -2,7 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Models\Domain;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +51,31 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, $exception)
+    {
+        Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
+
+        $domain = new Domain(url()->current());
+        $domain_part = $domain->getPart();
+
+        if (strpos($domain_part, 'api.') !== false) {
+            Log::debug('api exception error in Handler class');
+
+            if ($this->isHttpException($exception)) {
+                return response()->json([
+                    'message' => $exception->getMessage()
+                ], $exception->getStatusCode());
+            }
+            // HTTPエラー以外のエラー。400(Bad Request)を返す
+            return response()->json([
+                'message' => 'hoge'
+            ], Response::HTTP_BAD_REQUEST);
+        } else {
+            Log::debug('web exception error in Handler class');
+        }
+
+        return parent::render($request, $exception);
     }
 }

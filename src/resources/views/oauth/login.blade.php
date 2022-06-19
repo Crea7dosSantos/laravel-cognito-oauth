@@ -11,6 +11,15 @@
             <form class="mt-8" id='form' action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="px-5 py-7">
+                    @if ($errors->any())
+                    <div class="px-4 py-2 mt-1 mb-5 text-red-600">
+                        <ul class="list-disc">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <label class="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
                     <input type="text" class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" name="email" />
                     <label class="font-semibold text-sm text-gray-600 pb-1 block">Password</label>

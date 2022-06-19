@@ -59,12 +59,12 @@ final class PassportController extends Controller
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
         $state = $request->session()->pull('state');
-
         $code_verifier = $request->session()->pull('code_verifier');
 
         throw_unless(
             strlen($state) > 0 && $state === $request->state,
-            InvalidArgumentException::class
+            InvalidArgumentException::class,
+            'リクエストに付与された認可コードで不正な値が使用されています'
         );
 
         $client = Client::where('name', 'MPA')->first();
@@ -72,7 +72,7 @@ final class PassportController extends Controller
         Http::asForm()->post('http://host.docker.internal:80/oauth/token', [
             'grant_type' => 'authorization_code',
             'client_id' => $client->id,
-            'redirect_uri' => 'http://localhost/auth/callback',
+            'redirect_uri' => env('APP_URL') . '/auth/callback',
             'code_verifier' => $code_verifier,
             'code' => $request->code,
         ]);
