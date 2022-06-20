@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\RefreshTokenController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+
+use Laravel\Passport\Token;
+use Lcobucci\JWT\Configuration;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/token/refresh', RefreshTokenController::class);
+
 Route::middleware(['auth:api', 'update.expiration'])->group(function () {
     Route::get('/user', function (Request $request) {
-        return response()->json($request->user());
+        $user = $request->user();
+        return response()->json($user);
     });
 });
