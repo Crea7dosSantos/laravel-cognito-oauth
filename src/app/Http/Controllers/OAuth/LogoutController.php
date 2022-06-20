@@ -19,11 +19,7 @@ final class LogoutController extends Controller
     {
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
-        $request->user()
-            ->tokens
-            ->each(function ($token, $key) {
-                $this->revokeAccessAndRefreshTokens($token->id);
-            });
+        $request->user()->revokeTokens();
 
         Auth::logout();
         $request->session()->invalidate();
@@ -34,20 +30,5 @@ final class LogoutController extends Controller
         }
 
         return redirect()->route('welcome');
-    }
-
-    /**
-     * revoke token and refresh token
-     *
-     * @param [type] $tokenId
-     * @return void
-     */
-    private function revokeAccessAndRefreshTokens($tokenId): void
-    {
-        $tokenRepository = app('Laravel\Passport\TokenRepository');
-        $refreshTokenRepository = app('Laravel\Passport\RefreshTokenRepository');
-
-        $tokenRepository->revokeAccessToken($tokenId);
-        $refreshTokenRepository->revokeRefreshTokensByAccessTokenId($tokenId);
     }
 }

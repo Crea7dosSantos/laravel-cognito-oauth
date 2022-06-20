@@ -106,6 +106,7 @@ final class CognitoController extends Controller
 
         $user = $condition_query->first();
         Auth::loginUsingId($user->id);
+        $user->updateExpiredAt();
 
         return $request->wantsJson()
             ? new JsonResponse([], Response::HTTP_NO_CONTENT)

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Client;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -38,8 +39,9 @@ class AuthServiceProvider extends ServiceProvider
             'uses' => '\App\Http\Controllers\OAuth\CustomAccessTokenController@issueUserToken',
         ])->middleware(['api']);
 
-        Passport::tokensExpireIn(now()->addMinute(10));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
+        Passport::useClientModel(Client::class);
+        Passport::tokensExpireIn(now()->addMinute(30));
+        Passport::refreshTokensExpireIn(now()->addMinute(60));
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
     }
 }

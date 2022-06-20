@@ -33,7 +33,7 @@ Route::controller(CognitoController::class)->prefix('cognito')->group(function (
     Route::get('callback', 'callback')->name('cognito.callback');
 });
 
-Route::middleware(['auth:web', 'update.expiration'])->group(function () {
+Route::middleware(['auth:web', 'ensure.expiration', 'update.expiration'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/logout', LogoutController::class)->name('logout');
 });

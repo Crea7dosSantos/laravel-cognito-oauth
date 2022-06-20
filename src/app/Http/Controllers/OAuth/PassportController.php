@@ -4,6 +4,7 @@ namespace App\Http\Controllers\OAuth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
@@ -71,13 +72,21 @@ final class PassportController extends Controller
 
         $client = Client::where('name', 'MPA')->first();
 
-        Http::asForm()->post('http://host.docker.internal:80/oauth/token', [
+        $response = Http::asForm()->post('http://host.docker.internal:80/oauth/token', [
             'grant_type' => 'authorization_code',
             'client_id' => $client->id,
             'redirect_uri' => env('APP_URL') . '/auth/callback',
             'code_verifier' => $code_verifier,
             'code' => $request->code,
         ]);
+
+        if ($response->failed()) {
+            Log::debug('Passportが発行するトークンの取得に失敗しました');
+
+            return redirect()
+                ->route('login')
+                ->withErrors(['Passportが発行するトークンの取得に失敗しました']);
+        }
 
         return redirect()->route('home');
     }

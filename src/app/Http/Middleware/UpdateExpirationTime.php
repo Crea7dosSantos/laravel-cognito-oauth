@@ -28,13 +28,11 @@ class UpdateExpirationTime
         }
 
         $user = $request->user();
-        $now_at = Carbon::now();
 
         $before_expired_at = $user->expired_at;
         Log::debug("更新前の最終有効期限: {$before_expired_at}");
 
-        $user->expired_at = $now_at->addMinutes(30);
-        $user->save();
+        $user->updateExpiredAt();
         $expired_at = $user->expired_at;
 
         Log::debug("保存した最終有効期限: {$expired_at}");

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\OAuth;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Laravel\Passport\ClientRepository;
@@ -31,9 +33,20 @@ final class CustomAuthorizationController extends AuthorizationController
 
         if ($request->user()) {
             Log::debug('認証が済んでいます');
-            Log::debug($request->user());
-            $hoge = $request->session()->get('hoge');
-            Log::debug($hoge);
+            $expired_at = new Carbon($request->user()->expired_at);
+            Log::debug("有効期限: $expired_at");
+
+            if ($expired_at->isPast()) {
+                Log::debug("Sessionの有効時間を過ぎているので、ログアウトしてトークンを全て無効化します");
+
+                $request->user()->revokeTokens();
+
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return redirect()->route('login');
+            }
         }
 
         $authRequest = $this->withErrorHandling(function () use ($psrRequest) {
