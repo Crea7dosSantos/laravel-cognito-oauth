@@ -48,6 +48,9 @@ final class LoginAction
             throw new NotExistsUserException('入力されたログイン情報に一致するユーザーが見つかりません');
         }
 
+        Log::debug('認証に成功しました');
+
         Auth::loginUsingId($user->id);
+        $user->updateExpiredAt();
     }
 }
