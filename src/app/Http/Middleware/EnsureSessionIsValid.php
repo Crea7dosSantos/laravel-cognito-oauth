@@ -22,15 +22,13 @@ class EnsureSessionIsValid
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
         $user = $request->user();
-
         $expired_at = new Carbon($user->expired_at);
-        Log::debug("Session lifetimeが有効な時刻: $expired_at");
 
         if ($expired_at->isPast()) {
+            Log::debug("Session lifetimeが有効な時刻: $expired_at");
             Log::debug("Sessionの有効時間を過ぎているので、ログアウトしてトークンを全て無効化します");
 
             $request->user()->revokeTokens();
-
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();

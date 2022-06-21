@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\OAuth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OAuth\Login\StoreRequest;
 use App\UseCases\OAuth\LoginAction;
 use Aws\CognitoIdentityProvider\Exception\CognitoIdentityProviderException;
 use Illuminate\Foundation\Auth\RedirectsUsers;
@@ -19,17 +20,20 @@ final class LoginController extends Controller
     {
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 
+        Log::debug($request->session()->get('url.intended'));
+        Log::debug($request->session()->all());
+
         return view('oauth.login');
     }
 
     /**
      * login function
      *
-     * @param Request $request
+     * @param StoreRequest $request
      * @param LoginAction $action
      * @return JsonResponse|\Illuminate\Http\RedirectResponse|CognitoIdentityProviderException
      */
-    public function store(Request $request, LoginAction $action)
+    public function store(StoreRequest $request, LoginAction $action)
     {
         Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
 

@@ -8,6 +8,8 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Laravel\Passport\Exceptions\OAuthServerException;
+use League\OAuth2\Server\Exception\OAuthServerException as ExceptionOAuthServerException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -27,7 +29,8 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        //
+        OAuthServerException::class,
+        ExceptionOAuthServerException::class
     ];
 
     /**
@@ -48,6 +51,8 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
+
         $this->reportable(function (Throwable $e) {
             //
         });
@@ -62,16 +67,6 @@ class Handler extends ExceptionHandler
 
         if (strpos($domain_part, 'api.') !== false) {
             Log::debug('api exception error in Handler class');
-
-            // if ($this->isHttpException($exception)) {
-            //     return response()->json([
-            //         'message' => $exception->getMessage()
-            //     ], $exception->getStatusCode());
-            // }
-            // // HTTPエラー以外のエラー。400(Bad Request)を返す
-            // return response()->json([
-            //     'message' => 'hoge'
-            // ], Response::HTTP_BAD_REQUEST);
         } else {
             Log::debug('web exception error in Handler class');
         }
