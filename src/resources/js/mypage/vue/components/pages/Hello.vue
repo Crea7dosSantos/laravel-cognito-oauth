@@ -73,7 +73,7 @@
           id="console"
         >
           <p class="pb-1">Last login: Wed Sep 25 09:11:04 on ttys002</p>
-          <p class="pb-1">Laraben:Devprojects laraben$</p>
+          <p class="pb-1">Laraben:Devprojects {{ name }}$</p>
         </div>
       </div>
     </div>
@@ -107,6 +107,8 @@ import Cookie from "js-cookie";
 
 export default {
   setup() {
+    let name = "";
+
     onMounted(() => {
       console.log("Component is mounted!");
 
@@ -121,6 +123,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
+          name = response.data.name;
         })
         .catch((err) => {
           console.log(err.response.data.message);
@@ -136,7 +139,7 @@ export default {
       window.location.href = `${url}/logout?logout_uri=${logoutUri}`;
     }
 
-    return { logout };
+    return { logout, name };
   },
 };
 </script>

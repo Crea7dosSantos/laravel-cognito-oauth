@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import Hello from './components/pages/Hello.vue'
 import Login from './components/pages/Login.vue'
 import Redirect from './components/pages/Redirect.vue'
@@ -27,9 +28,7 @@ const routes = [
     }
 ]
 
-const router = createRouter({
+export default createRouter({
     history: createWebHistory(),
     routes,
 })
-
-export default router
