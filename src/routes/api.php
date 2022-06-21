@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\MeController;
 use App\Http\Controllers\Api\RefreshTokenController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('/token/refresh', RefreshTokenController::class);
 
 Route::middleware(['auth:api', 'update.expiration'])->group(function () {
-    Route::get('/user', function (Request $request) {
-        $user = $request->user();
-        return response()->json($user);
-    });
+    Route::get('/me', MeController::class);
 });
