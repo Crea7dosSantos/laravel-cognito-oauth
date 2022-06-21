@@ -68,7 +68,10 @@
                                     artist of considerable range.
                                 </p>
                                 <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
-                                    tokens: {{ Auth::user()->oauthAcessToken }}
+                                    @foreach (Auth::user()->clients as $client)
+                                <p>client_name: {{ $client->name }}</p>
+                                <p>client_id: {{ $client->id }}</p>
+                                @endforeach
                                 </p>
                                 <a href="#pablo" class="font-normal text-pink-500">Show more</a>
                             </div>

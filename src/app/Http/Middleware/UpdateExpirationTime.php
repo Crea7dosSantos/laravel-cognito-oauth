@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -27,15 +26,8 @@ class UpdateExpirationTime
             return $response;
         }
 
-        $user = $request->user();
-
-        $before_expired_at = $user->expired_at;
-        Log::debug("更新前の最終有効期限: {$before_expired_at}");
-
-        $user->updateExpiredAt();
-        $expired_at = $user->expired_at;
-
-        Log::debug("保存した最終有効期限: {$expired_at}");
+        $request->user()->updateExpiredAt();
+        Log::debug("保存した最終有効期限: {$request->user()->expired_at}");
 
         return $response;
     }
