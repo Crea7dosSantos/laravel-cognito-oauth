@@ -14,6 +14,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const EXTEND_EXPIRED_MINUTE = 30;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -89,7 +91,7 @@ class User extends Authenticatable
     public function updateExpiredAt(): void
     {
         $now_at = Carbon::now();
-        $this->expired_at = $now_at->addMinutes(3);
+        $this->expired_at = $now_at->addMinutes(self::EXTEND_EXPIRED_MINUTE);
         $this->save();
     }
 }

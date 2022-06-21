@@ -12,8 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.browserSync('http://localhost:80')
-    .js('resources/js/web/app.js', 'public/js/web')
-    .js('resources/js/mypage/app.js', 'public/js/mypage')
+    .ts('resources/js/web/app.ts', 'public/js/web')
+    .ts('resources/js/mypage/app.ts', 'public/js/mypage')
     .vue()
     .postCss('resources/css/web/app.css', 'public/css/web', [
         require('tailwindcss'),
