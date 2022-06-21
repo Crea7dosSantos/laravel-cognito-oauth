@@ -73,7 +73,11 @@
           id="console"
         >
           <p class="pb-1">Last login: Wed Sep 25 09:11:04 on ttys002</p>
-          <p class="pb-1">Laraben:Devprojects {{ name }}$</p>
+          <p class="pb-1">LaravelCognitoOauth:Devprojects {{ me.name }}$</p>
+          <p class="pb-1">└─▪cognito_sub: {{ me.cognito_sub }}</p>
+          <p class="pb-1">└─▪cognito_google_sub: {{ me.cognito_google_sub }}</p>
+          <p class="pb-1">└─▪cognito_apple_sub: {{ me.cognito_apple_sub }}</p>
+          <p class="pb-1">└─▪expired_at: {{ me.expired_at }}</p>
         </div>
       </div>
     </div>
@@ -101,35 +105,12 @@
 
 <script>
 import { onMounted } from "@vue/runtime-core";
-import axios from "axios";
-import router from "../../router";
-import Cookie from "js-cookie";
+import useMe from "../../../composables/me";
 
 export default {
   setup() {
-    let name = "";
-
-    onMounted(() => {
-      console.log("Component is mounted!");
-
-      axios.defaults.withCredentials = true;
-      axios
-        .get("http://api.localhost/me", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + Cookie.get("access_token"),
-          },
-          responsetype: "json",
-        })
-        .then((response) => {
-          console.log(response.data);
-          name = response.data.name;
-        })
-        .catch((err) => {
-          console.log(err.response.data.message);
-          router.push({ name: "login" });
-        });
-    });
+    const { me, getMe } = useMe();
+    onMounted(getMe);
 
     function logout() {
       console.log("called logout function");
@@ -139,7 +120,7 @@ export default {
       window.location.href = `${url}/logout?logout_uri=${logoutUri}`;
     }
 
-    return { logout, name };
+    return { logout, me };
   },
 };
 </script>
