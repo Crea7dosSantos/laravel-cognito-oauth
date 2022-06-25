@@ -28,7 +28,6 @@ final class InvokeRequest extends ApiRequest
 
         return [
             'client_id' => 'required|exists:oauth_clients,id',
-            'access_token' => 'required',
             'refresh_token' => 'required',
         ];
     }
@@ -43,7 +42,6 @@ final class InvokeRequest extends ApiRequest
         return [
             'client_id.required' => '指定されたパラメータに不正があります',
             'client_id.exists' => '指定されたパラメータに不正があります',
-            'access_token.required' => '指定されたパラメータに不正があります',
             'refresh_token.required' => '指定されたパラメータに不正があります'
         ];
     }

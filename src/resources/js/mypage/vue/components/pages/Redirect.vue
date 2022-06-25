@@ -22,7 +22,7 @@ export default {
       console.log("Component is mounted!");
 
       axios
-        .post("http://mypage.localhost:80/oauth/token", {
+        .post("http://localhost/oauth/token", {
           grant_type: "authorization_code",
           client_id: clientId,
           client_secret: clientSecret,

@@ -16,7 +16,6 @@ export default function useMe() {
                 },
                 responseType: "json"
             });
-            console.log(response.data)
             me.value = response.data;
         } catch (e: any) {
             console.log(e.response.data.message);
