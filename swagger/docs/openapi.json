@@ -1,0 +1,461 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Laravel-Cognito-OAuth APIs",
+        "version": "0.0.1",
+        "contact": {
+            "name": "Yusaku Ikeda",
+            "email": "crea7dos3tos@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://{host}:{port}/",
+            "description": "開発用",
+            "variables": {
+                "host": {
+                    "default": "localhost"
+                },
+                "port": {
+                    "default": "8083"
+                }
+            }
+        },
+        {
+            "url": "https://google.co.jp/",
+            "description": "プロダクション API"
+        }
+    ],
+    "tags": [
+        {
+            "name": "OAuth",
+            "description": "認証に関する取り扱いを行います"
+        }
+    ],
+    "paths": {
+        "/oauth/authorize": {
+            "get": {
+                "tags": [
+                    "OAuth"
+                ],
+                "summary": "認可エンドポイント",
+                "description": "認可エンドポイントは、認証サーバーによって提供されるエンドポイントで、HTTPS GETのみをサポートします。\n\nリライング・パーティは通常、このリクエストをブラウザ経由で行います。",
+                "parameters": [
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "クライアントIDです。\n\n認証サーバーに対して、事前登録したリライング・パーティのクライアントIDを指定する必要があります。必須のパラメータです。",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "96947a8c-a150-4def-b6c0-aaf6873f8c3f"
+                        }
+                    },
+                    {
+                        "name": "redirect_uri",
+                        "in": "query",
+                        "description": "リダイレクトURIはリライング・パティーのURIです。\n\nリダイレクトURIは認証サーバーが発行した認可コードの受け渡し先になります。認証が行われると、認証サーバーはステータスコード302のレスポンスを返してブラウザをリダイレクトURIにリダイレクトします。その際、クエリパラメータの形で認可コードが渡されます。\n\n認証サーバーに対してリライング・パーティを事前登録する際に、指定したURIをパラメータとして指定する必要があります。必須のパラメータです。",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "http://localhost/auth/callback"
+                        }
+                    },
+                    {
+                        "name": "response_type",
+                        "in": "query",
+                        "description": "レスポンスのタイプです。\n\n安全にアクセストークン（JWT）やリフレッシュトークンを認証サーバーで生成する為に、「code」を指定してください。必須のパラメータです。",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "code"
+                        }
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "ランダムな文字列です。\n\n認証サーバーはリライング・パーティを登録する際に指定した、リダイレクトURIにリダイレクトレスポンスを返す際に、この値を含めます。リライング・パーティはトークンエンドポイントに認可コードを用いてリクエストする前に、stateパラメータを検証することで、CSRFを防ぐために利用することができます。任意のパラメータです。",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "eHBmS7HST89VzUObwkTB0wk1g1eSlmWk54w1jotV"
+                        }
+                    },
+                    {
+                        "name": "code_challenge",
+                        "in": "query",
+                        "description": "PKCEでを使った認可コードグラントで利用されるパラメータの一つで、code_verifierに対してcode_challenge_methodの計算をほどこして算出された値です。\n\ncode_verifierはRFC7376仕様（https://datatracker.ietf.org/doc/html/rfc7636）で定義されているように、文字、数字、記号文字を含む43文字から128文字のランダムな文字列でなければなりません。code_verifierに対してcode_challenge_methodのハッシュ値を計算し、 それにBase64URLエンコードを施したものがcode_challengeになります。任意のパラメータです。",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM"
+                        }
+                    },
+                    {
+                        "name": "code_challenge_method",
+                        "in": "query",
+                        "description": "PKCEでを使った認可コードグラントで利用されるパラメータの一つで、code_challenge_methodの値は「S256」を利用してください。\n\n「plain」を指定すると、code_challengeが流出した場合、全く同じ値であるcode_verifierも流出したことになります。任意のパラメータです。",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "S256"
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "$ref": "#/components/responses/redirectFound"
+                    }
+                }
+            }
+        },
+        "/oauth/token": {
+            "post": {
+                "tags": [
+                    "OAuth"
+                ],
+                "summary": "トークンエンドポイント",
+                "description": "トークンエンドポイントは、認証サーバーによって提供されるエンドポイントで、HTTPS POSTのみをサポートします。\n\nリライング・パーティはブラウザ経由でなく、このエンドポイントに直接リクエストを送信します。",
+                "parameters": [
+                    {
+                        "name": "grant_type",
+                        "in": "query",
+                        "description": "トークン付与タイプです。\n\n「authorization_code」か「refresh_token」を指定してください。「authorization_code」が指定された場合に、認証サーバーはこの値を持って、認可コードグランによるトークンリクエストであることを知ります。\n\n「refresh_token」という値を指定する際は、トークンを更新する際に利用します。必須のパラメータです。",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "authorization_code"
+                        }
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "クライアントIDです。\n\n認証サーバーに対して、事前登録したリライング・パーティのクライアントIDを指定する必要があります。必須のパラメータです。",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "96947a8c-a150-4def-b6c0-aaf6873f8c3f"
+                        }
+                    },
+                    {
+                        "name": "redirect_uri",
+                        "in": "query",
+                        "description": "リダイレクトURIはリライング・パティーのURIです。\n\nリダイレクトURIは認証サーバーが発行した認可コードの受け渡し先になります。認可エンドポイントでクエリパラメータとして含めた値を指定します。\n\n認証サーバーに対してリライング・パーティを事前登録する際に、指定したURIをパラメータとして指定する必要があります。「grant_type」に「grant_type」に「authorization_code」を指定した場合は、必須のパラメータになります。",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "http://localhost/auth/callback"
+                        }
+                    },
+                    {
+                        "name": "code_verifier",
+                        "in": "query",
+                        "description": "PKCEでを使った認可コードグラントで利用されるパラメータの一つで、リライング・パーティが認可エンドポイントにリクエストを送信する前に生成した値です。\n\n認証サーバーはリライング・パーティから送信されたこの値を、認可エンドポイントのリクエストに含められたcode_challengeとcode_challenge_methodから検証し、一致する場合は、トークンをレスポンスとして返します。",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"
+                        }
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "リダイレクトレスポンスに付与された認可コードです。\n\n認可コードは「grant_type」に「authorization_code」を指定した際に必須のパラメータになります。",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "def50200c77a7d298e31cbc45ddd1050ffec2c0535712e21ce629318e8c69a5a7fefe4c2b28527d7ad3ec29e40dbb0e49b9349470150b8180332a7b9e864913e06ecad48a83ca4dde2bc444c1371eda04d1537d690d0659d68f2dc6c8d92c084bf7cda22f2b86308f97265bfd6e1d44c242646cf89edbcfc2e07d4ce18dafb8560fbe438bf3dc1f4c1755355f03e14f7b38534de7312f7bb75a8a1526318046c89e559c3370a253787fe283cb07c92950d9502f768575fbe8ea971e3fd59e956bb0ee22ec5cf4d086714c68b6fd51453e21ba04b9c6c827850ba5bdd2e60e0f990225a4cfaf377583d482af5ac21a6f92774dd5961b178bfc2607e607a6731dc245df21e0f55bd654174a82679ba64d27922f29ab829c174e8ef09f55c74b80704cc2e0ea8e5c9f8cd6eb0dddd2711f66ae3f4f5b5e09b0c642216aed4d10cc898a129eb6b7f90efc7893e634af9b602f954ec2da757af140587f45ed66aa9d8f2013f33ce78c9d5911ac6b915ca0a3b7ae65b2b8b56defd50d2ab59ad6f9a3000ab2affb67e87468cec106ae00127c148b56a894a41d56708e03af9648177dc704369088d3010fc466dfa766f"
+                        }
+                    },
+                    {
+                        "name": "refresh_token",
+                        "in": "query",
+                        "description": "リフレッシュトークンです。\n\n「grant_type」に「refresh_token」を指定した場合は、必須のパラメータになります。",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "def5020094204ed89035552a449fa4ba641869ab79cf41c52d682955db89b3067438b2df183018dfc42875f0ecaac6435dbd3a04a3f738ba699b25b049e6a869b01f13f6c970dabe06fe8ac1891935eb7a50067f85857cab46b21475510d79e2603e288e87c006f9d37225ce2990d9c77d7d9ed764b1286e82188719939d4fb29d6b2db63bc6b2669340896b794b9789852ed71fe3eba9b2147825f16807a8b74da36a885b8ba44f7921184a37985e33adc6c7e57e45400c8c4c60716666056ec902d3524dd7c496e6bb01254762af14951ff0fcda8300d06255c2a1b23a77ffd2ccb0a8e835a3fa2e88dc4fb8e175891f5ddad8213aa81496ad4514dbe8f239c9877ae7bd260a9fbc665e3aefd0db5f5f131f491ec185fd411c0233f7544b7e7d098469baee99519c717f98a70ab2f7de3ab3619d91a5e3c37698bf5e30de03acd7c130ce4870c8dda07d175ce7dfa8f96a978ac9e31d38fc2b7c1257604ad376ecbb83c8bd9812bdd155dc298a8be18a97da909a330b832e211047471be23c0ef5e46c"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/token"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unAuthorizedError"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "session": {
+                "type": "apiKey",
+                "in": "cookie",
+                "name": "laravel_session"
+            }
+        },
+        "requestBodies": {},
+        "responses": {
+            "success": {
+                "description": "成功時のステータスコードです。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/success"
+                        }
+                    }
+                }
+            },
+            "redirectFound": {
+                "description": "HyperText Transfer Protocol (HTTP) の 302 Found リダイレクトステータスレスポンスコードは、リクエストされたリソースが一時的に Location で示された URL へ移動したことを示します。",
+                "headers": {
+                    "Location": {
+                        "description": "ログイン画面へのURLが含まれます。（例: http://localhost/login）",
+                        "schema": {
+                            "type": "string",
+                            "format": "uri"
+                        },
+                        "examples": {
+                            "url": {
+                                "value": "http://localhost/login"
+                            }
+                        }
+                    }
+                }
+            },
+            "badRequestError": {
+                "description": "構文が無効であるためサーバーがリクエストを理解できないことを示します。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/400Error"
+                        }
+                    }
+                }
+            },
+            "unAuthorizedError": {
+                "description": "HTTP 標準ではunauthorized(不許可)と定義されていますが、意味的にはこのレスポンスはunauthenticated(未認証)です。つまり、クライアントはリクエストされたレスポンスを得るためには認証を受けなければなりません。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/401Error"
+                        }
+                    }
+                }
+            },
+            "forbiddenError": {
+                "description": "認証されていないなどの理由でクライアントにコンテンツのアクセス権がなく、サーバーが適切なレスポンスの返信を拒否していることを示します。 401 とは異なり、クライアントの識別子がサーバーに知られています。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/403Error"
+                        }
+                    }
+                }
+            },
+            "notFoundError": {
+                "description": "サーバーがリクエストされたリソースを発見できないことを示します。ブラウザーでは、これは URL が解釈できなかったことを意味します。 API では、これは通信先が有効であるものの、リソース自体が存在しないことを意味することがあります。サーバーは認証されていないクライアントからリソースの存在を隠すために、 403 の代わりにこのレスポンスを返すことがあります。このレスポンスコードはウェブで頻繁に見られるため、おそらくもっとも有名なコードでしょう。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/404Error"
+                        }
+                    }
+                }
+            },
+            "csrfError": {
+                "description": "CSRFでエラーが発生した事を表示します。RFCが定めるステータスコードには存在しませんが、Laravelで独自に定義されたステータスコードです。例としてはGET以外のリクエストでCSRFトークンが送られていない時などに発生します。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/419Error"
+                        }
+                    }
+                }
+            },
+            "unprocessableEntityError": {
+                "description": "he HyperText Transfer Protocol (HTTP) の 422 Unprocessable Entity 応答状態コードは、サーバーが要求本文のコンテンツ型を理解でき、要求本文の構文が正しいものの、中に含まれている指示が処理できなかったことを表します。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/422Error"
+                        }
+                    }
+                }
+            },
+            "internalServerError": {
+                "description": "サーバー側で処理方法がわからない事態が発生したことを示します。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/500Error"
+                        }
+                    }
+                }
+            },
+            "serviceUnavailable": {
+                "description": "サーバーはリクエストを処理する準備ができていないことを示します。一般的な原因は、サーバーがメンテナンスや過負荷でダウンしていることです。このレスポンスとともに問題について説明する、ユーザーにわかりやすいページを送信するべきであることに注意してください。このレスポンスは一時的な状況について使用するものであり、また可能であれば、サービスが復旧する前に Retry-After: HTTP ヘッダーに予定時刻を含めるべきです。また、これら一時的な状況のレスポンスは通常キャッシュされるべきではないことから、ウェブ管理者はこのレスポンスとともに送られるキャッシュ関連のヘッダーに注意しなければなりません。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/503Error"
+                        }
+                    }
+                }
+            },
+            "token": {
+                "description": "認証サーバーから返却されるトークンです。",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/authToken"
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "success": {
+                "title": "Success",
+                "type": "object"
+            },
+            "302Found": {
+                "title": "302 Found",
+                "type": "object"
+            },
+            "400Error": {
+                "title": "badRequestError",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "エラーメッセージ",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "エラーが発生しました。時間をあけて再度お試しください"
+                    }
+                }
+            },
+            "401Error": {
+                "title": "unAuthorizedError",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "エラーメッセージ",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "認証できません。認証を行ってください"
+                    }
+                }
+            },
+            "403Error": {
+                "title": "forbiddenError",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "エラーメッセージ",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "こちらへのアクセス権限がありません。再度実行してください。"
+                    }
+                }
+            },
+            "404Error": {
+                "title": "notFoundError",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "エラーメッセージ",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "お探しになっている〇〇は見つかりませんでした。"
+                    }
+                }
+            },
+            "419Error": {
+                "title": "csrfError",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "エラーメッセージ",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "CSRFの部分で弾かれました。"
+                    }
+                }
+            },
+            "422Error": {
+                "title": "unprocessableEntityError",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "エラーメッセージ",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "Requestの拡張部分で弾かれました。"
+                    }
+                }
+            },
+            "500Error": {
+                "title": "internalServerError",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "エラーメッセージ",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "エラーが発生しました。再度時間を空けてお試しください"
+                    }
+                }
+            },
+            "503Error": {
+                "title": "serviceUnavailable",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "エラーメッセージ",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "サービスにアクセスが集中している為アクセスが出来ません。再度時間をあけてお試しください。"
+                    }
+                }
+            },
+            "authToken": {
+                "title": "Token",
+                "type": "object",
+                "properties": {
+                    "token_type": {
+                        "title": "トークンタイプ",
+                        "description": "Bearerという値が入っています。Bearerトークンであることを示しています。",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "Bearer"
+                    },
+                    "expires_in": {
+                        "title": "トークンに対する有効期限",
+                        "description": "アクセストークンの有効期限が秒単位で入っています。例えば、この値が3600 の場合、有効期限は1時間であることを示しています。",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "1800"
+                    },
+                    "access_token": {
+                        "title": "アクセストークン",
+                        "description": "このパラメーターの値として入っている文字列がアクセストークンです。アクセストークンはクライアントからリソースサーバーに対するアクセスに利用されます。クライアントからリソースサーバーに対するすべてのアクセスに、アクセストークンが含まれていなければなりません。",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5Njk0N2FhMy05MGJjLTRiMzAtYWE2Mi0wNmY5YjE2YmM0NWMiLCJqdGkiOiI5NzFkOWM3NGIwNDQzODg0OWMxMTJhYTRkM2VlZjVlMTlmZGFmZjQxOGJhMTY1MjFiM2ViNTNhNTk0Njk2YmZmN2IzMmM4ZTM1YjEzN2E5MCIsImlhdCI6MTY1NjMwMDM3Ny44ODI5MjQsIm5iZiI6MTY1NjMwMDM3Ny44ODI5MywiZXhwIjoxNjU2MzAyMTc3Ljg0Nzg2NCwic3ViIjoiMSIsInNjb3BlcyI6W119.mb9aLTgTstXrQJlnfVPPRVY-R9IUOzuTTO5B65DCOixuzP5MUcMTYU89p2AATdJcyjLJcvKW5pKPwyN29NsgxaR7cwywbJTx5-PHRLmrbFOLYlUPcMf20IAGfeyII-mow2KcSo2kfwsuMx2FoppBwEhu51yCG0nyimTuoPpQrJ_paeJE8xgODXztX_SW2tgf9kaAnX_jj0DU0Si4b6ReUPkq-hfjs_iAMerRjLfsMf6kpFAo2agh8EWcSHDCOOeY9vL0pJLVNEwKcqlOOJYjrka9igknYWfbUf_RFDvQNzjzP021pgMod_suSk_RGN4RpC_XbzivWw8BgYLUnaKelPjFbPf1OJvADOmpIybS2nTCp19l-wadLvYbdF7LYnHa9kfi77Rn0dIfoVJaOIkokstTyn7FtSdut9KcLkZToj-iOU1--ylHHn46vqbRSL-A4EELyVAqPtLwzR3YzlHijyxDMTrXS51eSqS8EcaK0gkwds9_2gg9ycuKfgkBzX9SThFvhe43Rdyo7H197zM_5boNbPr9mHOqTzQtHKyzqTCFtEMf97kzfnYd64RGIF2S1T4UbYSt1DEWQEB9dD-HJJib0ObOT_csnWZWcEnDRVMMKlQq_RbKOi-VthecevgudBs7FNOacU8_1m-dTfQRKwXScxv_WS7OJL3f0_fiA_4"
+                    },
+                    "refresh_token": {
+                        "title": "更新トークン",
+                        "description": "このパラメーターとして入っている文字列がリフレッシュトークンです。リフレッシュトークンは、クライアントから認可サーバーに対してアクセストークンの 再発行を要求する際に利用されます。",
+                        "type": "string",
+                        "nullable": false,
+                        "example": "def5020022b1aa52cf1a5ddae5e2c0dd0fc13cc462f46aee348db91713b897039c29ed9411f7c335604b9f2ff80595e0b0e11257c243c42987ebda8f40118972403e3d6550d12d116d7986638f052d3a154d604635999ee3dabda470c941f5ea2eb8a491a4ce48ac108542382128f0c193fcb7add70f43c300cb66308b5f62b3bfb105893ccd5a2a5511b384123754157f2576fc3e1239d663a7b822bb11f51a46a23808ac2d388381b359e42db2222668a9c030d2f0967015501b5bc583ce37d9411dc42484360d697d64aebee423d5b78cbac4533b154e8919cc62479a9774537b73be7165390b29f507539007920d2a41a5e90a92cac073acf9115cb3158f45d56c06266c7bd3b543211551a1d8eed960c5a9d1faffb618293622dbe8371abac1aeca47e7820c0a660eec9e197be062adb672b87a189763cf13f56ac40d1f12c34d414b47f84a4f8ed862fec32e9447b9dc03ec2bb3194d697e05716af19d77c2a4cb3dd2fe067599e83f75876724c26f76d75c9db8b66693f6fc9fe10416e6182b62"
+                    }
+                }
+            }
+        }
+    }
+}
