@@ -35,6 +35,9 @@ class AuthServiceProvider extends ServiceProvider
         Route::get('oauth/authorize', [
             'uses' => '\App\Http\Controllers\OAuth\CustomAuthorizationController@authorize',
         ])->middleware(['web', 'auth']);
+        Route::post('oauth/token', [
+            'uses' => '\App\Http\Controllers\OAuth\CustomAccessTokenController@issueUserToken',
+        ])->middleware(['api']);
 
         Passport::useClientModel(Client::class);
         Passport::tokensExpireIn(now()->addMinute(30));

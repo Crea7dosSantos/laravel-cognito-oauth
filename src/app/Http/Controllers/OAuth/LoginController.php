@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\OAuth;
 
+use App\Exceptions\NotExistsUserException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OAuth\Login\StoreRequest;
 use App\UseCases\OAuth\LoginAction;
@@ -31,7 +32,7 @@ final class LoginController extends Controller
      *
      * @param StoreRequest $request
      * @param LoginAction $action
-     * @return JsonResponse|\Illuminate\Http\RedirectResponse|CognitoIdentityProviderException
+     * @return JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function store(StoreRequest $request, LoginAction $action)
     {
@@ -41,6 +42,8 @@ final class LoginController extends Controller
             $action($request);
         } catch (CognitoIdentityProviderException $e) {
             return response()->json(['message' => $e->getAwsErrorMessage()], Response::HTTP_UNAUTHORIZED);
+        } catch (NotExistsUserException $e) {
+            return response()->json(['message' => $e->getMessage()], Response::HTTP_UNAUTHORIZED);
         }
 
         return $request->wantsJson()
