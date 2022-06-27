@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\MeController;
-use App\Http\Controllers\Api\RefreshTokenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +13,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::post('/token/refresh', RefreshTokenController::class);
 
 Route::middleware(['auth:api', 'update.expiration'])->group(function () {
     Route::get('/me', MeController::class);

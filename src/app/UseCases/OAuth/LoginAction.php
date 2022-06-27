@@ -42,7 +42,12 @@ final class LoginAction
         }
 
         $jwt = $response->toArray()['AuthenticationResult']['IdToken'];
-        $decoded = $this->jwt_verifier->decode($jwt);
+        Log::debug($jwt);
+        try {
+            $decoded = $this->jwt_verifier->decode($jwt);
+        } catch (\Throwable $th) {
+            throw new NotExistsUserException('decodeに失敗しました');
+        }
 
         if (!User::where('cognito_sub', $decoded->sub)->exists()) {
             throw new NotExistsUserException('入力されたログイン情報に一致するユーザーが見つかりません');
