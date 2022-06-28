@@ -4,13 +4,15 @@
 
 <script>
 import { onMounted } from "@vue/runtime-core";
-import axios from "axios";
 import { useRoute } from "vue-router";
+import router from "../../router";
+import axios from "axios";
+import Cookie from "js-cookie";
 
 export default {
   setup() {
-    const clientId = "968ee01e-2f04-4a73-ae97-11e80003a5f6";
-    const clientSecret = "bWxruHpdYk3Mg1C460u0yvcaK0Vl1wMbn81RVcVu";
+    const clientId = process.env.MIX_SPA_CLIENT_ID;
+    const clientSecret = process.env.MIX_SPA_CLIENT_SECRET_ID;
     const redirectUri = "http://mypage.localhost/auth/callback";
     const route = useRoute();
     const code = route.query.code;
@@ -20,7 +22,7 @@ export default {
       console.log("Component is mounted!");
 
       axios
-        .post("http://mypage.localhost:80/oauth/token", {
+        .post("http://localhost/oauth/token", {
           grant_type: "authorization_code",
           client_id: clientId,
           client_secret: clientSecret,
@@ -29,23 +31,10 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
+          Cookie.set("access_token", response.data.access_token);
+          Cookie.set("refresh_token", response.data.refresh_token);
 
-          axios.defaults.withCredentials = true;
-          axios
-            .get("http://api.localhost/user", {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer" + response.data.access_token,
-                "X-Requested-With": "XMLHttpRequest",
-              },
-              responsetype: "json",
-            })
-            .then((response) => {
-              console.log(response.data);
-            })
-            .catch((err) => {
-              console.log(err.response.data.message);
-            });
+          router.push({ name: "hello" });
         });
     });
   },

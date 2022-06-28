@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Client;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
@@ -30,8 +32,16 @@ class AuthServiceProvider extends ServiceProvider
             Passport::routes();
         }
 
-        Passport::tokensExpireIn(now()->addMinute(10));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
+        Route::get('oauth/authorize', [
+            'uses' => '\App\Http\Controllers\OAuth\CustomAuthorizationController@authorize',
+        ])->middleware(['web', 'auth']);
+        Route::post('oauth/token', [
+            'uses' => '\App\Http\Controllers\OAuth\CustomAccessTokenController@issueUserToken',
+        ])->middleware(['api']);
+
+        Passport::useClientModel(Client::class);
+        Passport::tokensExpireIn(now()->addMinute(30));
+        Passport::refreshTokensExpireIn(now()->addMonths(1));
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
     }
 }

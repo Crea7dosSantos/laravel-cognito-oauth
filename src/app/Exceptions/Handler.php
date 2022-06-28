@@ -2,7 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Models\Domain;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
+use Laravel\Passport\Exceptions\OAuthServerException;
+use League\OAuth2\Server\Exception\OAuthServerException as ExceptionOAuthServerException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -22,7 +26,8 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        //
+        OAuthServerException::class,
+        ExceptionOAuthServerException::class
     ];
 
     /**
@@ -43,8 +48,26 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
+
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, $exception)
+    {
+        Log::debug(__CLASS__ . '::' . __FUNCTION__ . ' called:(' . __LINE__ . ')');
+
+        $domain = new Domain(url()->current());
+        $domain_part = $domain->getPart();
+
+        if (strpos($domain_part, 'api.') !== false) {
+            Log::debug('api exception error in Handler class');
+        } else {
+            Log::debug('web exception error in Handler class');
+        }
+
+        return parent::render($request, $exception);
     }
 }

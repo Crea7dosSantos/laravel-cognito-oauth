@@ -12,6 +12,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="/img/favicon.ico">
     <title>@yield('pageTitle') | 認可システム</title>
-    <script src="{{ mix('/js/admin/app.js') }}"></script>
-    <link type="text/css" href="/css/admin/app.css" rel="stylesheet">
+    <script src="{{ mix('/js/web/app.js') }}"></script>
+    <link type="text/css" href="/css/web/app.css" rel="stylesheet">
 </head>
