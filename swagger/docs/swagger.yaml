@@ -3,8 +3,8 @@ info:
   title: Laravel-Cognito-OAuth APIs
   version: 1.0.0
   contact:
-    name: Yusaku Ikeda
-    email: ikeda@whizzy.co.jp
+    name: Crea7dosSantos
+    email: crea7dos3tos@gmail.com
 tags:
   - name: OAuth
     description: 認証に関する取り扱いを行います
