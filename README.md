@@ -21,3 +21,6 @@ $ make stop
 ```bash
 $ make install
 ```
+
+### sequence
+![Social ID Provider](drawio/social.png)
