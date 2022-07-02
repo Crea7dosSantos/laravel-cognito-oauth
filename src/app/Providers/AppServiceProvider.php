@@ -14,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment('local')) {
+            // ER図生成用のProviderはcomposer の require-devでインストールしているので、localでのみ使用
+            $this->app->register(\BeyondCode\ErdGenerator\ErdGeneratorServiceProvider::class);
+        }
     }
 
     /**

@@ -15,7 +15,13 @@ ENV TZ=Asia/Tokyo \
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 
 RUN apk upgrade --update && \
-  apk --no-cache --update add autoconf gcc g++ make icu-dev libzip-dev tzdata oniguruma-dev imagemagick imagemagick-dev libpng libpng-dev libjpeg-turbo-dev freetype-dev && \
+  apk --no-cache --update add autoconf gcc g++ make icu-dev libzip-dev tzdata oniguruma-dev imagemagick imagemagick-dev libpng libpng-dev libjpeg-turbo-dev freetype-dev graphviz fontconfig && \
+  rm -rf /var/cache/apk/* && \
+  curl -O https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip && \
+  mkdir -p /usr/share/fonts/NotoSansCJKjp && \
+  unzip NotoSansCJKjp-hinted.zip -d /usr/share/fonts/NotoSansCJKjp/ && \
+  rm NotoSansCJKjp-hinted.zip && \
+  fc-cache -fv && \
   pecl install imagick && \
   docker-php-ext-enable imagick && \
   docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \

@@ -72,3 +72,5 @@ cache:
 install:
 	docker-compose exec app composer install
 	docker-compose exec app yarn install
+generate-erd:
+	docker-compose exec app php artisan generate:erd er-diagram.png
