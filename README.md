@@ -22,8 +22,8 @@ $ make stop
 $ make install
 ```
 
-## oauth sequence
-### Social ID Provider
+## OAuth sequence
+### social identity providers
 ![Social ID Provider](drawio/social.png)
 
 ### username & password
